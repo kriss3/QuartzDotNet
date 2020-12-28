@@ -2,6 +2,7 @@
 using Quartz.Impl;
 using JobLibrary;
 using static System.Console;
+using System.Threading;
 
 namespace ConsAppQuartz
 {
@@ -18,7 +19,7 @@ namespace ConsAppQuartz
             //Construct scheduler factory;
             ISchedulerFactory schFactory = new StdSchedulerFactory();
 
-            IScheduler scheduler = await schFactory.GetScheduler(new System.Threading.CancellationToken());
+            IScheduler scheduler = await schFactory.GetScheduler(new CancellationToken());
             await scheduler.Start();
 
             //Job
