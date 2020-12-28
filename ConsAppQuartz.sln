@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsAppQuartz", "ConsAppQuartz\ConsAppQuartz.csproj", "{4DCF22B1-22BA-418A-8D33-37E897B5D8CA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{8138BBEB-3D9E-48F4-850B-54FA5CA26476}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Job", "Job", "{6B67A768-6ED9-48FE-96D1-C96EB7E22D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobLibrary", "JobLibrary\JobLibrary.csproj", "{30DD93D1-2E12-4CEF-A699-27C7AB2323B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,16 @@ Global
 		{4DCF22B1-22BA-418A-8D33-37E897B5D8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DCF22B1-22BA-418A-8D33-37E897B5D8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DCF22B1-22BA-418A-8D33-37E897B5D8CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30DD93D1-2E12-4CEF-A699-27C7AB2323B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30DD93D1-2E12-4CEF-A699-27C7AB2323B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30DD93D1-2E12-4CEF-A699-27C7AB2323B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30DD93D1-2E12-4CEF-A699-27C7AB2323B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4DCF22B1-22BA-418A-8D33-37E897B5D8CA} = {8138BBEB-3D9E-48F4-850B-54FA5CA26476}
+		{30DD93D1-2E12-4CEF-A699-27C7AB2323B8} = {6B67A768-6ED9-48FE-96D1-C96EB7E22D28}
 	EndGlobalSection
 EndGlobal
