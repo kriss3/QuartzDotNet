@@ -21,7 +21,7 @@ namespace JobLibrary
             return Task.Run(()=> 
             {
                 var noOfCustomers = GetNumberOfRecords();
-                if (noOfCustomers != prevNumberOfCustomers) ;
+                if (noOfCustomers != prevNumberOfCustomers)
                 {
                     prevNumberOfCustomers = noOfCustomers;
                     GetCustomers();
