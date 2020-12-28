@@ -26,6 +26,10 @@ namespace JobLibrary
                     prevNumberOfCustomers = noOfCustomers;
                     GetCustomers();
                 }
+                else 
+                {
+                    WriteLine($"No Db changes. Current number of records in Customers tbl: {noOfCustomers}");
+                }
             }); 
         }
 
