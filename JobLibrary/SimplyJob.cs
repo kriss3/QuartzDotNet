@@ -11,33 +11,20 @@ namespace JobLibrary
 {
     public class SimplyJob : IJob
     {
+        private int prevNumberOfCustomers = 90;
+        private readonly string nwConn = ConfigurationManager.ConnectionStrings["nwConn"].ConnectionString;
+        private readonly string customerQuery = $"Select CustomerID from dbo.Customers";
+        private readonly string recordQuery = $"Select count(*) from dbo.Customers";
+
         public Task Execute(IJobExecutionContext context)
         {
             return Task.Run(()=> 
             {
-                var rowsCollection = new ObservableCollection<string>();
-                rowsCollection.CollectionChanged += RowsCollection_CollectionChanged;
-                var nwConn = ConfigurationManager.ConnectionStrings["nwConn"].ConnectionString;
-                using (var con = new SqlConnection(nwConn)) 
+                var noOfCustomers = GetNumberOfRecords();
+                if (noOfCustomers != prevNumberOfCustomers) ;
                 {
-                    //example of DataReader aka data house forward only read only
-                    con.Open();
-                    var query = $"Select CustomerID from dbo.Customers";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    
-                    if (dr.HasRows)
-                    {
-                        while (dr.Read())
-                        {
-                            rowsCollection.Add(dr.GetString(0));
-                        }
-                    }
-                    else
-                    {
-                        WriteLine($"No more rows,");
-                    }
-                    dr.Close();
+                    prevNumberOfCustomers = noOfCustomers;
+                    GetCustomers();
                 }
             }); 
         }
@@ -51,6 +38,44 @@ namespace JobLibrary
                 {
                     WriteLine($"{item}");
                 }
+            }
+        }
+
+        private int GetNumberOfRecords() 
+        {
+            var numberOfCustomerRecords = -1;
+            using (var conn = new SqlConnection(nwConn))
+            {
+                conn.Open();
+                var cmd = new SqlCommand(recordQuery, conn);
+                numberOfCustomerRecords = (int)cmd.ExecuteScalar();
+            }
+            return numberOfCustomerRecords;
+        }
+        private void GetCustomers() 
+        {
+            var rowsCollection = new ObservableCollection<string>();
+            rowsCollection.CollectionChanged += RowsCollection_CollectionChanged;
+
+            using (var conn = new SqlConnection(nwConn))
+            {
+                //example of DataReader aka data house forward only read only
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(customerQuery, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        rowsCollection.Add(dr.GetString(0));
+                    }
+                }
+                else
+                {
+                    WriteLine($"No more rows,");
+                }
+                dr.Close();
             }
         }
     }
